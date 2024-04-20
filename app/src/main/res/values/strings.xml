@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Minesweeper</string>
+    <string name="select_difficulty">select difficulty</string>
+    <string name="minesweeper">minesweeper</string>
+    <string name="easy">easy</string>
+    <string name="start">start</string>
+    <string name="hard">hard</string>
+    <string name="medium">medium</string>
+    <string name="saved_high_score_key">highscore</string>
+    <string name="last_time" />
+    <string name="na">-//-</string>
+    <string name="last_game">last game</string>
+    <string name="best_time">best time</string>
+    <string name="_12">12</string>
+
+</resources>
