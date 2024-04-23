@@ -125,7 +125,7 @@
 
         <RadioButton
             android:id="@+id/medium"
-            android:layout_width="239dp"
+            android:layout_width="match_parent"
             android:layout_height="62dp"
             android:fontFamily="monospace"
             android:text="@string/medium"

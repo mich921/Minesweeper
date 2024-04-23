@@ -1,6 +1,7 @@
 package com.example.minesweeper
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         val imageView = ImageView(this)
         imageView.setImageResource(R.drawable.stay)
         imageView.adjustViewBounds = true
-        imageView.maxHeight = 250  // Установите максимальную высоту по желанию
+        imageView.maxHeight = 250
         imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
 
         // Добавление ImageView в AlertDialog

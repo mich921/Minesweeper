@@ -16,15 +16,19 @@ import kotlinx.android.synthetic.main.activity_board.*
 import kotlin.random.Random
 
 class BoardActivity : AppCompatActivity() {
+    // Таймер для отслеживания времени игры
     private lateinit var chronometer: Chronometer
 
-    var choice: Int = 1
-    var flaggedMines = 0
-    var fastestTime = " not played"
-    var lastGameTime = " not played"
+    var choice: Int = 1 // Выбор игрока между флагом и открытием клетки
+    var flaggedMines = 0 // Количество помеченных мин
+    var fastestTime = " not played" // Лучшее время игры
+    var lastGameTime = " not played" // Время последней игры
+
+    // Текущее состояние игры
     var status = Status.ONGOING
         private set
 
+    // Перечисление возможных состояний игры
     enum class Status {
         WON,
         ONGOING,
@@ -42,8 +46,7 @@ class BoardActivity : AppCompatActivity() {
 
         val intent = intent
 
-        // Setting up board according to the option selected in MainActivity
-
+        // Настройка доски в соответствии с выбранным уровнем сложности
         val level = intent.getStringExtra("selectedLevel")
         if (level.equals("easy")) {
             setUpBoard(10, 10, 10)
@@ -60,6 +63,7 @@ class BoardActivity : AppCompatActivity() {
         }
     }
 
+    // Настройка доски: создание клеток и размещение мин
     private fun setUpBoard(row: Int, col: Int, mine: Int) {
 
         // Задаем кол-во мин
@@ -211,8 +215,8 @@ class BoardActivity : AppCompatActivity() {
         return false
     }
 
-    private val xDir = intArrayOf(-1, -1, 0, 1, 1, 1, 0, -1)
-    private val yDir = intArrayOf(0, 1, 1, 1, 0, -1, -1, -1)
+    private val xDir = intArrayOf(-1, -1, -1, 0, 0, 1, 1, 1)
+    private val yDir = intArrayOf(0, 1, -1, 1, -1, 0, 1, -1)
     private fun handleZero(x: Int, y: Int, cellBoard: Array<Array<MineCell>>, rowSize: Int, colSize: Int) {
 
         cellBoard[x][y].isRevealed = true
@@ -262,7 +266,7 @@ class BoardActivity : AppCompatActivity() {
         val imageView = ImageView(this)
         imageView.setImageResource(R.drawable.stay)
         imageView.adjustViewBounds = true
-        imageView.maxHeight = 250  // Установите максимальную высоту по желанию
+        imageView.maxHeight = 250
         imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
 
         // Добавление ImageView в AlertDialog
@@ -297,7 +301,7 @@ class BoardActivity : AppCompatActivity() {
         val imageView = ImageView(this)
         imageView.setImageResource(R.drawable.stay)
         imageView.adjustViewBounds = true
-        imageView.maxHeight = 250  // Установите максимальную высоту по желанию
+        imageView.maxHeight = 250
         imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
 
         // Добавление ImageView в AlertDialog
@@ -322,11 +326,10 @@ class BoardActivity : AppCompatActivity() {
         alertDialog.show()
     }
 
-
     private fun updateScore() {
         chronometer.stop()
 
-        // Получение информации о прошедшем времени по хронометру
+        // Получение информации о прошедшем времени
         val elapsedTime = SystemClock.elapsedRealtime() - chronometer.base;
         val sharedPref = getPreferences(Context.MODE_PRIVATE)
         val lastTime = elapsedTime.toInt()
@@ -381,7 +384,7 @@ class BoardActivity : AppCompatActivity() {
         val imageView = ImageView(this)
         imageView.setImageResource(R.drawable.jopa)
         imageView.adjustViewBounds = true
-        imageView.maxHeight = 250  // Установите максимальную высоту по желанию
+        imageView.maxHeight = 250
         imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
 
         // Добавление ImageView в AlertDialog
@@ -409,6 +412,15 @@ class BoardActivity : AppCompatActivity() {
         else builder.setMessage("$lastGameTime is your time")
 
         builder.setTitle("Congratulations! You Won")
+        // Создание ImageView и установка изображения
+        val imageView = ImageView(this)
+        imageView.setImageResource(R.drawable.chuk_norris)
+        imageView.adjustViewBounds = true
+        imageView.maxHeight = 250
+        imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
+
+        // Добавление ImageView в AlertDialog
+        builder.setView(imageView)
         builder.setCancelable(false)
 
         builder.setPositiveButton("Restart Game"
@@ -470,6 +482,5 @@ class BoardActivity : AppCompatActivity() {
         if (button.value == 6) button.setBackgroundResource(R.drawable.six)
         if (button.value == 7) button.setBackgroundResource(R.drawable.seven)
         if (button.value == 8) button.setBackgroundResource(R.drawable.eight)
-
     }
 }
